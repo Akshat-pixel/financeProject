@@ -13,7 +13,7 @@ pipeline{
             steps{
                 script{
                     def image = docker.build("11akshat/financeproject:latest")
-                    docker.withRegistry('https://index.docker.io/v1/', '11akshat') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockercred') {
                         image.push()
                     }
                 }
