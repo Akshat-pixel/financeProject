@@ -11,7 +11,7 @@ resource "aws_vpc_security_group_ingress_rule" "sshIntoInstance" {
   ip_protocol       = "tcp"
   from_port         = 22
   to_port           = 22
-  cidr_ipv4         = "205.254.168.181/32"
+  cidr_ipv4         = "205.254.168.211/32"
   description       = "Allow SSH access from my IP"
 }
 
@@ -20,7 +20,7 @@ resource "aws_vpc_security_group_ingress_rule" "httpAccess" {
   ip_protocol       = "tcp"
   from_port         = 80
   to_port           = 80
-  cidr_ipv4         = "205.254.168.181/32"
+  cidr_ipv4         = "205.254.168.211/32"
   description       = "Allow HTTP access from my IP"
 }
 

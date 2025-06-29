@@ -1,0 +1,16 @@
+#SPDX-License-Identifier: MIT-0
+--- 
+# tasks file for create_docker_image
+- name: Pull an image
+  community.docker.docker_image_pull:
+    name: 11akshat/financeproject 
+    tag: latest
+
+- name: Start a container
+  community.docker.docker_container:
+    name: financeproject
+    image: 11akshat/financeproject:latest
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"

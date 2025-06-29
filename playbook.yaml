@@ -1,0 +1,5 @@
+- name: docker setup
+  hosts: all
+  roles:
+    - install_docker
+    - create_docker_image
