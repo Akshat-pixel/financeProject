@@ -21,8 +21,7 @@ pipeline{
         }
         stage('start a new server using terraform'){
             steps{
-                script{
-                    sh 'cd terraform'
+                dir('terraform'){
                     sh 'terraform init'
                     sh 'terraform apply -auto-approve'
                 }
