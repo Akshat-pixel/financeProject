@@ -12,7 +12,7 @@ pipeline{
         stage('Build Docker Image and Push to Docker Hub'){
             steps{
                 script{
-                    def image = docker.build("11akshat/finance:latest")
+                    def image = docker.build("11akshat/financeproject:latest")
                     docker.withRegistry('https://index.docker.io/v1/', '11akshat') {
                         image.push()
                     }
