@@ -10,4 +10,4 @@ WORKDIR /var/www/html
 
 RUN rm -rf /var/www/html/*
 
-RUN git clone 
+RUN git clone git@github.com:Akshat-pixel/financeProject.git /var/www/html
