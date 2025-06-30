@@ -48,7 +48,7 @@ pipeline{
                     content = content.replace('PUBLIC_IP', env.PUBLIC_IP)
                     writeFile file: 'inventory.yaml', text: content
                     def key = params.Key
-                    writeFile file: 'key.pem', text: key
+                    writeFile file: 'finance-key.pem', text: key
                 }
             }
         }
