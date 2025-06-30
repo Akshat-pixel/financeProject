@@ -32,7 +32,8 @@ pipeline{
                 script{
                     dir('terraform'){
                         def publicip = sh(
-                            script: 'terraform output -raw public_ip'
+                            script: 'terraform output -raw public_ip',
+                            returnStdout: true
                         ).trim()
                     }
                     env.PUBLIC_IP = publicip
