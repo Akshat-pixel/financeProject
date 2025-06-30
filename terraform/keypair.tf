@@ -1,6 +1,6 @@
 resource "aws_key_pair" "finance_key" {
   key_name   = "finance-key"
-  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGMHrMIvYmZrKExDR4qVZopqO2KDTTLPc+St52wkuMRq akshatjain@Akshats-MacBook-Air.local" # Ensure this file exists with your public key
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDc+iZ7dmbmTbijKUAl1QU4sVgFgKcuilt9hB6JRUB5th5Fsq87SOKpIjCAXEzSM4zL4Dgab1xSWo0emgZ1qXoZh9+hb2L0i8dHvPSLwpS+cJki+9OLb6EfNHOAjyynb1KJYWNheMtHPA2ofGoeXGLq1ZLD8azN5GkXaT1CPn/+0pv05EO4DHsSffylMCDHV2yPuH0XZp5w1yRNybU4F6WhE/+zMTrimyY/fzXigZx6uEzgWQOX21Nrk2cpfNYhmiJeKoiXeFLWW0X0aTjfoMZQBdJ4pGCgMFIzcDqwt9zHQXoI03DxzjCGd5YaaWX2DHMVN3GFJ0MQMCrF6FBb/pneiUVzB6nqxMF1z8FaamuaQsoOEwQfrydbjHoM6bysxKTgDDdf5JfD9zGXVVN7mvU0rhvcdHEwkztZGCVVMJRYDx5vi3wlOf8iNo0SoLGpS3qTQOf2RqODvBlwt4iZ1nJDAP8/aw7O/ql88OKa1flAzREPki5ksHH6Rr6eo8Et9Fv/Alw/IdfpKFtFN0+Bgdmcu7OnVnhVs2ZpmQ2p0q9WLPoE0tOEo8oMc31nY24AE0ycxuj8CwhCuXSwoc1CSU4QkUDjQVxF8hk0OnvuiV1owPR2u2qxjRoithiuhFVg5osg5ZG6WfJtx4aTYo8QmYp0afH0Em/ND6hJy+QrnUz+CQ== akshatjain@Akshats-MacBook-Air.local"
   tags = {
     Name = "finance_project"
   }
