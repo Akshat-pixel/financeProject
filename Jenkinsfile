@@ -1,8 +1,5 @@
 pipeline{
     agent any
-    environment {
-        PEM_FILE = credentials('finance-key.pem')
-    }
     stages{
         stage('Fetch Code'){
             steps{
@@ -47,8 +44,10 @@ pipeline{
                     def content = readFile('inventory.yaml')
                     content = content.replace('PUBLIC_IP', env.PUBLIC_IP)
                     writeFile file: 'inventory.yaml', text: content
-                    writeFile file: 'finance-key.pem', text: env.PEM_FILE
-                    sh "chmod 600 finance-key.pem"
+                    withCredentials([file(credentialsId: 'finance-key.pem', variable: 'PEM_FILE')]) {
+                        sh 'cp $PEM_FILE ./finance-key.pem'
+                        sh 'chmod 600 ./finance-key.pem'
+                    }
                 }
             }
         }
