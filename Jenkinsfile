@@ -30,8 +30,9 @@ pipeline{
         stage('get public ip of the server'){
             steps{
                 script{
+                    def publicip
                     dir('terraform'){
-                        def publicip = sh(
+                        publicip = sh(
                             script: 'terraform output -raw public_ip',
                             returnStdout: true
                         ).trim()
