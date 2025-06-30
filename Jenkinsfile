@@ -55,6 +55,7 @@ pipeline{
         stage('Run Ansible Playbook to install docker on the server'){
             steps{
                 script{
+                    sh 'sleep 60'
                     sh 'ansible-playbook -i inventory.yaml  playbook.yaml'
                 }
             }
