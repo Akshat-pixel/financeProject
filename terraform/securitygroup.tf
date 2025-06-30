@@ -24,6 +24,15 @@ resource "aws_vpc_security_group_ingress_rule" "httpAccess" {
   description       = "Allow HTTP access from my IP"
 }
 
+resource "aws_vpc_security_group_ingress_rule" "AllowAccessFromJenkinsSG" {
+  security_group_id            = aws_security_group.finance_sg.id
+  ip_protocol                  = "tcp"
+  from_port                    = 22
+  to_port                      = 22
+  referenced_security_group_id = "sg-080a1dd7f1e3dc47f"
+  description                  = "Allow SSH access from Jenkins security group"
+}
+
 resource "aws_vpc_security_group_egress_rule" "httpAccessOutbound" {
   security_group_id = aws_security_group.finance_sg.id
   ip_protocol       = "-1"
