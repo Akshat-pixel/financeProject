@@ -38,7 +38,6 @@ pipeline{
                         ).trim()
                     }
                     env.PUBLIC_IP = publicip
-                    sh "chmod 400 finance-key.pem"
                 }
             }
         }
@@ -50,6 +49,7 @@ pipeline{
                     writeFile file: 'inventory.yaml', text: content
                     def key = params.Key
                     writeFile file: 'finance-key.pem', text: key
+                    sh "chmod 400 finance-key.pem"
                 }
             }
         }
