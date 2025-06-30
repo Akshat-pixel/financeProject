@@ -36,9 +36,9 @@ pipeline{
                             script: 'terraform output -raw public_ip',
                             returnStdout: true
                         ).trim()
-                        sh "chmod 400 finance-key.pem"
                     }
                     env.PUBLIC_IP = publicip
+                    sh "chmod 400 finance-key.pem"
                 }
             }
         }
