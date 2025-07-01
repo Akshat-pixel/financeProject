@@ -27,14 +27,14 @@ pipeline{
         stage('get public ip of the server'){
             steps{
                 script{
-                    def publicip
+                    def privateip
                     dir('terraform'){
-                        publicip = sh(
-                            script: 'terraform output -raw public_ip',
+                        privateip = sh(
+                            script: 'terraform output -raw private_ip',
                             returnStdout: true
                         ).trim()
                     }
-                    env.PUBLIC_IP = publicip
+                    env.PRIVATE_IP = privateip
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline{
             steps{
                 script{
                     def content = readFile('inventory.yaml')
-                    content = content.replace('PUBLIC_IP', env.PUBLIC_IP)
+                    content = content.replace('PRIVATE_IP', env.PRIVATE_IP)
                     writeFile file: 'inventory.yaml', text: content
                     def roleContent = readFile('roles/create_docker_image/tasks/main.yml')
                     roleContent = roleContent.replace('VERSION', "${env.BUILD_NUMBER}")
