@@ -9,7 +9,7 @@ pipeline{
         stage('Build Docker Image and Push to Docker Hub'){
             steps{
                 script{
-                    def image = docker.build("11akshat/financeproject:latest")
+                    def image = docker.build("11akshat/financeproject:${env.BUILD_NUMBER}")
                     docker.withRegistry('https://index.docker.io/v1/', 'dockercred') {
                         image.push()
                     }
@@ -44,6 +44,9 @@ pipeline{
                     def content = readFile('inventory.yaml')
                     content = content.replace('PUBLIC_IP', env.PUBLIC_IP)
                     writeFile file: 'inventory.yaml', text: content
+                    def roleContent = readFile('roles/create_docker_image/tasks/main.yml')
+                    roleContent = roleContent.replace('VERSION', "${env.BUILD_NUMBER}")
+                    writeFile file: 'roles/create_docker_image/tasks/main.yml', text: roleContent
                     withCredentials([file(credentialsId: 'finance-key.pem', variable: 'PEM_FILE')]) {
                         sh 'cp $PEM_FILE ./finance-key.pem'
                         sh 'chmod 600 ./finance-key.pem'

@@ -4,12 +4,12 @@
 - name: Pull an image
   community.docker.docker_image_pull:
     name: 11akshat/financeproject 
-    tag: latest
+    tag: VERSION
 
 - name: Start a container
   community.docker.docker_container:
     name: financeproject
-    image: 11akshat/financeproject:latest
+    image: 11akshat/financeproject:VERSION
     state: started
     restart_policy: always
     ports:
