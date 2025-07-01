@@ -16,6 +16,16 @@ pipeline{
                 }
             }              
         }
+
+        stage('Delete old images')
+        {
+            steps{
+                script{
+                    sh 'docker image prune -f'
+                }
+            }
+        }
+        
         stage('start a new server using terraform'){
             steps{
                 dir('terraform'){
