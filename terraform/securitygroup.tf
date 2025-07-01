@@ -6,18 +6,31 @@ resource "aws_security_group" "finance_sg" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "sshIntoInstance" {
+resource "aws_vpc_security_group_ingress_rule" "sshIntoInstanceFromMyIP" {
   security_group_id = aws_security_group.finance_sg.id
-  ip_protocol       = "-1"
-  cidr_ipv4         = "0.0.0.0/0"
-  description       = "Allow full access"
+  ip_protocol       = "tcp"
+  from_port         = 22
+  to_port           = 22
+  cidr_ipv4         = "205.254.168.211"
+  description       = "Allow ssh from my IP"
 }
 
-resource "aws_vpc_security_group_ingress_rule" "httpAccess" {
+resource "aws_vpc_security_group_ingress_rule" "httpAccessFromMyIP" {
   security_group_id = aws_security_group.finance_sg.id
-  ip_protocol       = "-1"
-  cidr_ipv6         = "::/0"
+  ip_protocol       = "tcp"
+  from_port         = 80
+  to_port           = 80
+  cidr_ipv4         = "205.254.168.211"
   description       = "Allow HTTP access from my IP"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "sshFromAnsibleController" {
+  security_group_id            = aws_security_group.finance_sg.id
+  ip_protocol                  = "tcp"
+  from_port                    = 22
+  to_port                      = 22
+  referenced_security_group_id = "sg-080a1dd7f1e3dc47f"
+  description                  = "Allow SSH access from Ansible controller using private IP"
 }
 
 resource "aws_vpc_security_group_egress_rule" "httpAccessOutbound" {
