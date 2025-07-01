@@ -21,11 +21,15 @@ pipeline{
         {
             steps{
                 script{
-                    sh 'docker image prune -f'
+                    sh '''
+                        docker images 11akshat/financeproject --format '{{.Repository}}:{{.Tag}}' | \
+                        grep -v '${env.BUILD_NUMBER}' | \
+                        xargs -r docker rmi
+                    '''
                 }
             }
         }
-        
+
         stage('start a new server using terraform'){
             steps{
                 dir('terraform'){
