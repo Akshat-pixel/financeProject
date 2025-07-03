@@ -10,12 +10,13 @@
   community.docker.docker_container:
     name: financeproject
     state: stopped
-    ignore_errors: true
+  ignore_errors: true
 
 - name: Remove old container
   community.docker.docker_container:
     name: financeproject
     state: absent
+  ignore_errors: true
 
 - name: Remove old image
   community.docker.docker_image:
@@ -27,7 +28,7 @@
 - name: Start a container
   community.docker.docker_container:
     name: financeproject
-    image: 11akshat/financeproject:VERSION
+    image: 11akshat/financeproject:"{{ VERSION }}"
     state: started
     restart_policy: always
     ports:
