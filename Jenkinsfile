@@ -68,14 +68,14 @@ pipeline{
         stage('Run Ansible Playbook to install docker on the server'){
             steps{
                 script{
-                    sh 'sleep 30'
+                    sh 'sleep 60'
                     def version = env.BUILD_NUMBER as Integer
                     def prev_version = version - 1
                     echo "Version: ${version}"
                     echo "Previous Version: ${prev_version}"
-                    sh '''ansible-playbook -i inventory.yaml  playbook.yaml \
+                    sh """ansible-playbook -i inventory.yaml  playbook.yaml \
                         -e VERSION=${version} \
-                        -e PREV_VERSION=${prev_version}'''
+                        -e PREV_VERSION=${prev_version}"""
                 }
             }
         }
