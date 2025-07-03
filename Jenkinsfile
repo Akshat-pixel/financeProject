@@ -58,9 +58,6 @@ pipeline{
                     def content = readFile('inventory.yaml')
                     content = content.replace('PRIVATE_IP', env.PRIVATE_IP)
                     writeFile file: 'inventory.yaml', text: content
-                    def roleContent = readFile('roles/create_docker_image/tasks/main.yml')
-                    roleContent = roleContent.replace('VERSION', "${env.BUILD_NUMBER}")
-                    writeFile file: 'roles/create_docker_image/tasks/main.yml', text: roleContent
                     withCredentials([file(credentialsId: 'finance-key.pem', variable: 'PEM_FILE')]) {
                         sh 'cp $PEM_FILE ./finance-key.pem'
                         sh 'chmod 600 ./finance-key.pem'
@@ -72,7 +69,11 @@ pipeline{
             steps{
                 script{
                     sh 'sleep 60'
-                    sh 'ansible-playbook -i inventory.yaml  playbook.yaml'
+                    def version = env.BUILD_NUMBER as Integer
+                    def prev_version = version - 1
+                    sh '''ansible-playbook -i inventory.yaml  playbook.yaml \
+                        -e VERSION=${version} \
+                        -e PREV_VERSION=${prev_version}'''
                 }
             }
         }

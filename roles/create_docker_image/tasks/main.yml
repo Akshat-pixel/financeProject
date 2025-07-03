@@ -4,7 +4,25 @@
 - name: Pull an image
   community.docker.docker_image_pull:
     name: 11akshat/financeproject 
-    tag: VERSION
+    tag: {{ VERSION }}
+
+- name: Stop old container
+  community.docker.docker_container:
+    name: financeproject
+    state: stopped
+    ignore_errors: true
+
+- name: Remove old container
+  community.docker.docker_container:
+    name: financeproject
+    state: absent
+
+- name: Remove old image
+  community.docker.docker_image:
+    name: 11akshat/financeproject
+    tag: {{ PREV_VERSION }}
+    state: absent
+  ignore_errors: true
 
 - name: Start a container
   community.docker.docker_container:
