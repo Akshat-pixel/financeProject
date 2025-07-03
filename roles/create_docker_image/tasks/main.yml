@@ -28,7 +28,7 @@
 - name: Start a container
   community.docker.docker_container:
     name: financeproject
-    image: 11akshat/financeproject:"{{ VERSION }}"
+    image: "11akshat/financeproject:{{ VERSION }}"
     state: started
     restart_policy: always
     ports:
