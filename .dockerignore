@@ -1,0 +1,8 @@
+Dockerfile
+Jenkinsfile
+roles/
+terraform/
+ansible.cfg
+finance-key.pem
+inventory.yaml
+playbook.yaml
