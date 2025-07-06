@@ -68,7 +68,7 @@ pipeline{
         stage('Run Ansible Playbook to install docker on the server'){
             steps{
                 script{
-                    sh 'sleep 60'
+                    sh 'sleep 30'
                     def version = env.BUILD_NUMBER as Integer
                     def prev_version = version - 1
                     echo "Version: ${version}"
